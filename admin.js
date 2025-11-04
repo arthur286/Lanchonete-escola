@@ -16,6 +16,39 @@ function saveUsers(users) {
     localStorage.setItem('users', JSON.stringify(users));
 }
 
+// Função para garantir que os usuários padrão sempre existam
+function initializeDefaultUsers() {
+    const users = getUsers();
+    
+    // Sempre recriar o admin se não existir
+    if (!users['admin@lanchonete.com']) {
+        users['admin@lanchonete.com'] = {
+            password: 'admin123',
+            name: 'Administrador Lanchonete',
+            isAdmin: true
+        };
+    }
+    
+    // Recriar usuários de exemplo
+    if (!users['parent1@email.com']) {
+        users['parent1@email.com'] = {
+            password: 'senha123',
+            name: 'Maria Silva',
+            isAdmin: false
+        };
+    }
+    
+    if (!users['parent2@email.com']) {
+        users['parent2@email.com'] = {
+            password: 'senha456',
+            name: 'Carlos Oliveira',
+            isAdmin: false
+        };
+    }
+    
+    saveUsers(users);
+}
+
 // Função para migrar usuários antigos
 function migrateOldUsers() {
     const users = getUsers();
@@ -43,7 +76,6 @@ function migrateOldUsers() {
 
     if (needsSave) {
         saveUsers(users);
-        alert('Usuários antigos migrados com sucesso! As senhas foram definidas como: nome123');
     }
 }
 
@@ -56,6 +88,8 @@ function findStudentById(studentId, studentsData) {
 }
 
 function initializeAdminData() {
+    initializeDefaultUsers(); // Garante que os usuários sempre existam
+    
     const adminData = getAdminData();
     
     // Se não existirem dados, criar estrutura inicial
@@ -95,27 +129,6 @@ function initializeAdminData() {
             }
         };
         saveAdminData(adminData);
-    }
-
-    // Inicializar usuários padrão
-    const users = getUsers();
-    if (Object.keys(users).length === 0) {
-        users['admin@lanchonete.com'] = {
-            password: 'admin123',
-            name: 'Administrador Lanchonete',
-            isAdmin: true
-        };
-        users['parent1@email.com'] = {
-            password: 'senha123',
-            name: 'Maria Silva',
-            isAdmin: false
-        };
-        users['parent2@email.com'] = {
-            password: 'senha456',
-            name: 'Carlos Oliveira',
-            isAdmin: false
-        };
-        saveUsers(users);
     }
 
     // Migrar usuários antigos
