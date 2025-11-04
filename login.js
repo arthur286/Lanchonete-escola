@@ -3,7 +3,42 @@ function getUsers() {
     return JSON.parse(localStorage.getItem('users') || '{}');
 }
 
+// Função para garantir que os usuários padrão sempre existam
+function initializeDefaultUsers() {
+    const users = getUsers();
+    
+    // Sempre recriar o admin se não existir
+    if (!users['admin@lanchonete.com']) {
+        users['admin@lanchonete.com'] = {
+            password: 'admin123',
+            name: 'Administrador Lanchonete',
+            isAdmin: true
+        };
+    }
+    
+    // Recriar usuários de exemplo
+    if (!users['parent1@email.com']) {
+        users['parent1@email.com'] = {
+            password: 'senha123',
+            name: 'Maria Silva',
+            isAdmin: false
+        };
+    }
+    
+    if (!users['parent2@email.com']) {
+        users['parent2@email.com'] = {
+            password: 'senha456',
+            name: 'Carlos Oliveira',
+            isAdmin: false
+        };
+    }
+    
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    initializeDefaultUsers(); // Garante que os usuários sempre existam
+    
     // Verificar se o usuário já está logado
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
