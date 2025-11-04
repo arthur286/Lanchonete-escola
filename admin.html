@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Lanchonete Escolar</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Painel Administrativo</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" id="nav-pending">Comprovantes Pendentes</a></li>
+                        <li><a href="#" id="nav-students">Gerenciar Alunos</a></li>
+                        <li><a href="#" id="nav-add-consumption">Lançar Consumo</a></li>
+                        <li><a href="#" id="logout-btn">Sair</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span id="user-name">Administrador</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Comprovantes Pendentes -->
+        <section id="pending" class="section active">
+            <h2>Comprovantes Pendentes de Validação</h2>
+            <div id="pending-receipts" class="receipts-grid">
+                <!-- Comprovantes serão carregados aqui -->
+            </div>
+        </section>
+
+        <!-- Gerenciar Alunos -->
+        <section id="students" class="section">
+            <h2>Gerenciar Alunos</h2>
+            <div class="admin-actions">
+                <button id="add-student-btn" class="btn btn-success">Cadastrar Novo Aluno</button>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="student-search" placeholder="Buscar aluno...">
+            </div>
+            <div id="students-list" class="students-grid">
+                <!-- Lista de alunos será carregada aqui -->
+            </div>
+        </section>
+
+        <!-- Lançar Consumo -->
+        <section id="add-consumption" class="section">
+            <h2>Lançar Consumo</h2>
+            <div class="consumption-card">
+                <form id="consumption-form">
+                    <div class="form-group">
+                        <label for="student-select">Selecionar Aluno</label>
+                        <select id="student-select" required>
+                            <option value="">Selecione um aluno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumption-date">Data do Consumo</label>
+                        <input type="date" id="consumption-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumption-description">Descrição do Consumo</label>
+                        <input type="text" id="consumption-description" placeholder="Ex: Lanche - Pão de queijo + Suco" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumption-amount">Valor (R$)</label>
+                        <input type="number" id="consumption-amount" step="0.01" min="0.01" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lançar Consumo</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Detalhes do Comprovante -->
+    <div id="receipt-modal" class="modal">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <h3 id="receipt-modal-title">Detalhes do Comprovante</h3>
+            <div class="receipt-details">
+                <div class="receipt-info">
+                    <p><strong>Aluno:</strong> <span id="modal-student-name"></span></p>
+                    <p><strong>Responsável:</strong> <span id="modal-parent-name"></span></p>
+                    <p><strong>Valor:</strong> R$ <span id="modal-amount"></span></p>
+                    <p><strong>Data:</strong> <span id="modal-date"></span></p>
+                    <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                </div>
+                <div class="receipt-image">
+                    <h4>Comprovante:</h4>
+                    <img id="modal-receipt-img" src="" alt="Comprovante">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="approve-receipt" class="btn btn-success">Aprovar Depósito</button>
+                <button id="reject-receipt" class="btn btn-danger">Rejeitar</button>
+                <button id="modal-cancel" class="btn btn-secondary">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

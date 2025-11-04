@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete Escolar - Controle de Créditos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Lanchonete Escolar</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" id="nav-dashboard">Painel</a></li>
+                        <li><a href="#" id="nav-transactions">Transações</a></li>
+                        <li><a href="#" id="nav-upload">Enviar Comprovante</a></li>
+                        <li><a href="#" id="logout-btn">Sair</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span id="user-name">Usuário</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Painel de Saldo -->
+        <section id="dashboard" class="section active">
+            <h2>Painel do Aluno</h2>
+            <div class="student-info">
+                <div class="info-card">
+                    <h3 id="student-name">Nome do Aluno</h3>
+                    <p id="student-class">Turma: </p>
+                </div>
+                <div class="balance-card">
+                    <h3>Saldo Disponível</h3>
+                    <p class="balance" id="current-balance">R$ 0,00</p>
+                </div>
+            </div>
+
+            <!-- Últimas Transações -->
+            <div class="recent-transactions">
+                <h3>Últimas Transações</h3>
+                <div id="transactions-list" class="transactions-list">
+                    <!-- As transações serão carregadas aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Histórico de Transações -->
+        <section id="transactions" class="section">
+            <h2>Histórico Completo</h2>
+            <div class="filters">
+                <select id="filter-type">
+                    <option value="all">Todas as transações</option>
+                    <option value="credit">Créditos</option>
+                    <option value="debit">Consumos</option>
+                </select>
+                <input type="date" id="filter-date">
+            </div>
+            <div id="full-transactions-list" class="transactions-list">
+                <!-- Histórico completo será carregado aqui -->
+            </div>
+        </section>
+
+        <!-- Upload de Comprovante -->
+        <section id="upload" class="section">
+            <h2>Enviar Comprovante de Depósito</h2>
+            <div class="upload-card">
+                <p>Envie o comprovante PIX para adicionar crédito à conta do aluno.</p>
+                <form id="receipt-form">
+                    <div class="form-group">
+                        <label for="receipt-amount">Valor do Depósito (R$)</label>
+                        <input type="number" id="receipt-amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="receipt-date">Data da Transação</label>
+                        <input type="date" id="receipt-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="receipt-file">Comprovante (imagem)</label>
+                        <input type="file" id="receipt-file" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Comprovante</button>
+                </form>
+                <div class="upload-info">
+                    <h4>Informações para Depósito PIX</h4>
+                    <p><strong>Chave PIX:</strong> lanchonete.escola@exemplo.com</p>
+                    <p><strong>Beneficiário:</strong> Lanchonete da Escola</p>
+                    <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Confirmação -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-title">Confirmação</h3>
+            <p id="modal-message">Tem certeza que deseja realizar esta ação?</p>
+            <div class="modal-actions">
+                <button id="modal-confirm" class="btn btn-primary">Confirmar</button>
+                <button id="modal-cancel" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
